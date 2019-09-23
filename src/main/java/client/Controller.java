@@ -130,8 +130,8 @@ public class Controller {
         connect();
         try {
             out.writeUTF("/auth " + loginField.getText() + " " + passwordField.getText());
-//            loginField.clear();
-//            passwordField.clear();
+            loginField.clear();
+            passwordField.clear();
         } catch (IOException e) {
             e.printStackTrace();
         }
