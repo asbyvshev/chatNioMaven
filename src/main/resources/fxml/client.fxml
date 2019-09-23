@@ -13,7 +13,7 @@
 
     <HBox fx:id="upperPanel">
 
-        <TextField HBox.hgrow="ALWAYS" promptText="Логин" fx:id="loginfield"/>
+        <TextField HBox.hgrow="ALWAYS" promptText="Логин" fx:id="loginField"/>
         <PasswordField promptText="Пароль" fx:id="passwordField" onAction="#tryToAuth"/>
         <Button text="Авторизоваться" onAction="#tryToAuth" />
 

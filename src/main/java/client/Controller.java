@@ -27,7 +27,7 @@ public class Controller {
     HBox upperPanel;
 
     @FXML
-    TextField loginfield;
+    TextField loginField;
 
     @FXML
     PasswordField passwordField;
@@ -62,62 +62,59 @@ public class Controller {
         }
     }
 
-//    public void connect() {
-//        try {
-//            socket = new Socket(IP_ADDRESS, PORT);
-//            in = new DataInputStream(socket.getInputStream());
-//            out = new DataOutputStream(socket.getOutputStream());
-//            setAuthohorized(false);
-//            Thread t1 = new Thread(() -> {
-//                try {
-//                    while (true) {
-//                        String str = in.readUTF();
-//                        if (str.startsWith("/authok")) {
-//                            setAuthohorized(true);
-//                            break;
-//                        } else {
-//                            chatArea.appendText(str + "\n");
-//                        }
-//                    }
-//                    while (true) {
-//                        String str = in.readUTF();
-//
-//                        if (str.startsWith("/")) {
-//                            if (str.equals("/serverclosed")) break;
-//                            if (str.startsWith("/clientList")) {
-//                                String[] tokens = str.split(" ");
-//                                Platform.runLater(new Runnable() {
-//                                    @Override
-//                                    public void run() {
-//                                        clientList.getItems().clear();
-//                                        for (int i = 1; i < tokens.length; i++) {
-//                                            clientList.getItems().add(tokens[i]);
-//                                        }
-//                                    }
-//                                });
-//                            }
-//                        } else {
-//                            chatArea.appendText(str + "\n");
-//                        }
-//
-//                    }
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                } finally {
-//                    try {
-//                        socket.close();
-//                    } catch (IOException e) {
-//                        e.printStackTrace();
-//                    }
-//                    setAuthohorized(false);
-//                }
-//            });
-//            t1.setDaemon(true);
-//            t1.start();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
+    public void connect() {
+        try {
+            socket = new Socket(IP_ADDRESS, PORT);
+            in = new DataInputStream(socket.getInputStream());
+            out = new DataOutputStream(socket.getOutputStream());
+            setAuthohorized(false);
+            Thread t1 = new Thread(() -> {
+                try {
+                    while (true) {
+                        String str = in.readUTF();
+                        if (str.startsWith("/authok")) {
+                            setAuthohorized(true);
+                            break;
+                        } else {
+                            chatArea.appendText(str + "\n");
+                        }
+                    }
+                    while (true) {
+                        String str = in.readUTF();
+
+                        if (str.startsWith("/")) {
+                            if (str.equals("/serverclosed")) break;
+                            if (str.startsWith("/clientList")) {
+                                String[] tokens = str.split(" ");
+                                Platform.runLater(() -> {
+                                    clientList.getItems().clear();
+                                    for (int i = 1; i < tokens.length; i++) {
+                                        clientList.getItems().add(tokens[i]);
+                                    }
+                                });
+                            }
+                        } else {
+                            chatArea.appendText(str + "\n");
+                        }
+
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } finally {
+                    try {
+                        socket.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    setAuthohorized(false);
+                }
+            });
+            t1.setDaemon(true);
+            t1.start();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     public void sendMsg() {
         try {
@@ -130,11 +127,11 @@ public class Controller {
     }
 
     public void tryToAuth() {
-//        connect();
+        connect();
         try {
-            out.writeUTF("/auth " + loginfield.getText() + " " + passwordField.getText());
-            loginfield.clear();
-            passwordField.clear();
+            out.writeUTF("/auth " + loginField.getText() + " " + passwordField.getText());
+//            loginField.clear();
+//            passwordField.clear();
         } catch (IOException e) {
             e.printStackTrace();
         }
