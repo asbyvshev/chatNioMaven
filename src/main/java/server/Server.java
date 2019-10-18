@@ -9,6 +9,7 @@ import java.util.Vector;
 
 public class Server {
     private Vector<ClientHandler> clients;
+    private static final int PORT = 8186;
 
 
     public Server() throws SQLException {
@@ -17,7 +18,7 @@ public class Server {
         Socket socket = null;
         try {
             AuthService.connect();
-            server = new ServerSocket(8186);
+            server = new ServerSocket(PORT);
             System.out.println("Сервер запущен. Ожидаем клиентов...");
             while (true) {
                 socket = server.accept();
