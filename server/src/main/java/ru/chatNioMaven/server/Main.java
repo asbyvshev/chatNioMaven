@@ -1,4 +1,4 @@
-package server;
+package ru.chatNioMaven.server;
 
 import java.sql.SQLException;
 

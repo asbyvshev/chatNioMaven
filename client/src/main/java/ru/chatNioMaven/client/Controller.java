@@ -1,4 +1,4 @@
-package client;
+package ru.chatNioMaven.client;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
