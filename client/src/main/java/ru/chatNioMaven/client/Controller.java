@@ -44,7 +44,8 @@ public class Controller implements Initializable {
 
     final String IP_ADDRESS = "localhost";
     final int PORT = 8186;
-    boolean isAuthohorized;
+    final int BUFFER_SIZE = 256;
+//    boolean isAuthohorized;
 
 
 //    public void setAuthohorized(boolean isAuthohorized) {
@@ -140,7 +141,9 @@ public class Controller implements Initializable {
             Thread t1 = new Thread(() -> {
                 try {
                     while (true) {
-                        String str = in.readUTF();
+                        byte[] buffer = new byte[BUFFER_SIZE];
+                        in.read(buffer);
+                        String str = new String(buffer);
                         chatArea.appendText(str + "\n");
                     }
                 } catch (IOException e) {
@@ -159,16 +162,4 @@ public class Controller implements Initializable {
             e.printStackTrace();
         }
     }
-//
-//    public void tryToAuth() {
-//        connect();
-//        try {
-//            out.writeUTF("/auth " + loginField.getText() + " " + passwordField.getText());
-//            loginField.clear();
-//            passwordField.clear();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//
-//    }
 }
