@@ -1,4 +1,4 @@
-package ru.chatNioMaven.server;
+package ru.chatNioMaven.server.IO;
 
 import java.sql.*;
 

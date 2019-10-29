@@ -1,4 +1,4 @@
-package ru.chatNioMaven.server;
+package ru.chatNioMaven.server.IO;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
