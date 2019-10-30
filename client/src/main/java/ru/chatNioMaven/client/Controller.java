@@ -143,7 +143,7 @@ public class Controller implements Initializable {
                     while (true) {
                         byte[] buffer = new byte[BUFFER_SIZE];
                         in.read(buffer);
-                        String str = new String(buffer);
+                        String str = new String(bufSkipNull(buffer));
                         chatArea.appendText(str + "\n");
                     }
                 } catch (IOException e) {
@@ -161,5 +161,17 @@ public class Controller implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private byte[] bufSkipNull(byte[] buffer) {
+        int size = 1;
+        for (int i = 0; i < buffer.length; i++) {
+            if (buffer[i] == 0){
+                size = i;
+            }
+        }
+        byte [] modBuf = new byte [size];
+        System.arraycopy(buffer,0,modBuf,0,size);
+        return modBuf;
     }
 }
